@@ -25,7 +25,6 @@ namespace Worldle_MyTake_Console
         private static void Mainloop()
         {
             string nahodneSlovo = slovaDatabaze.NahodneSlovo;
-            nahodneSlovo = "RUSKO";
             int pocetPokusu = 0;
             string[] tipyHrace = new string[maximalniPocetPokusu];
             bool slovoUhodnuto = false;
