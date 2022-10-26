@@ -1,0 +1,8 @@
+C:\Users\orbit\source\repos\Worldle_MyTake_Console\Worldle_MyTake_Console\bin\Debug\Worldle_MyTake_Console.exe.config
+C:\Users\orbit\source\repos\Worldle_MyTake_Console\Worldle_MyTake_Console\bin\Debug\Worldle_MyTake_Console.exe
+C:\Users\orbit\source\repos\Worldle_MyTake_Console\Worldle_MyTake_Console\bin\Debug\Worldle_MyTake_Console.pdb
+C:\Users\orbit\source\repos\Worldle_MyTake_Console\Worldle_MyTake_Console\obj\Debug\Worldle_MyTake_Console.csproj.AssemblyReference.cache
+C:\Users\orbit\source\repos\Worldle_MyTake_Console\Worldle_MyTake_Console\obj\Debug\Worldle_MyTake_Console.csproj.SuggestedBindingRedirects.cache
+C:\Users\orbit\source\repos\Worldle_MyTake_Console\Worldle_MyTake_Console\obj\Debug\Worldle_MyTake_Console.csproj.CoreCompileInputs.cache
+C:\Users\orbit\source\repos\Worldle_MyTake_Console\Worldle_MyTake_Console\obj\Debug\Worldle_MyTake_Console.exe
+C:\Users\orbit\source\repos\Worldle_MyTake_Console\Worldle_MyTake_Console\obj\Debug\Worldle_MyTake_Console.pdb
