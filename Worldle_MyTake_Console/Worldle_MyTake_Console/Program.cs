@@ -78,9 +78,10 @@ namespace Worldle_MyTake_Console
                 Console.WriteLine("Došlo k přetížení, nutno zajít na web UJC a kliknout na \"Nechci čekat na odpověď\".");
                 try
                 {
-                    Process.Start("chrome", "https://prirucka.ujc.cas.cz/");
+                    Process.Start("chrome", "https://prirucka.ujc.cas.cz/"); // beru v potaz, že existuje jen a pouze chrome, ač ho já sám nemám lol
                 }
                 catch (Exception) { }
+                return true;
             }
             return nenalezeno;
         }
