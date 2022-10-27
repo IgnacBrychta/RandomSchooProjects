@@ -1,20 +1,24 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Collections;
+using System.Net;
+using System.Diagnostics;
 
 namespace Worldle_MyTake_Console
 {
     internal static class Program
     {
-        static readonly SlovaDatabaze slovaDatabaze = new SlovaDatabaze("wordList.txt", fixniDelkaSlov);
         public const int maximalniPocetPokusu = 6;
         public const int fixniDelkaSlov = 5;
         public static int vyhry = 0;
         public static int prohry = 0;
+        public static int pocetZadanychNesmyslu = 0;
+        static readonly SlovaDatabaze slovaDatabaze = new SlovaDatabaze("wordList.txt", fixniDelkaSlov);
+        private static WebClient client = new WebClient();
         static void Main(string[] args)
         {
             while (true)
@@ -55,9 +59,30 @@ namespace Worldle_MyTake_Console
                 prohry++;
                 Console.WriteLine($"\nCo už.\nSprávné slovo: {nahodneSlovo}");
             }
-            Console.WriteLine($"Úspěšná uhodnutí: {vyhry} | Neuhodnutí: {prohry}");
+            Console.WriteLine($"Úspěšná uhodnutí: {vyhry} | Neuhodnutí: {prohry} | Zmotaná slova: {pocetZadanychNesmyslu}");
             Console.ReadKey();
             Console.Clear();
+        }
+        public static bool JeVlozeneSlovoRealne(string slovo)
+        {
+            string data = client.DownloadString($"https://prirucka.ujc.cas.cz/?slovo={slovo}");
+            FileStream fileStream = new FileStream("xml_data", FileMode.Create);
+            StreamWriter streamWriter = new StreamWriter(fileStream);
+            streamWriter.Write(data);
+            streamWriter.Close();
+            fileStream.Close();
+            bool nenalezeno = data.Contains("nebyl nalezen");
+            bool pretizeni = data.Contains("is still evaluated.");
+            if (pretizeni)
+            {
+                Console.WriteLine("Došlo k přetížení, nutno zajít na web UJC a kliknout na \"Nechci čekat na odpověď\".");
+                try
+                {
+                    Process.Start("chrome", "https://prirucka.ujc.cas.cz/");
+                }
+                catch (Exception) { }
+            }
+            return nenalezeno;
         }
         private static void ZobrazitSpravnaPismenaTipu(string tip, string slovo)
         {
@@ -85,12 +110,20 @@ namespace Worldle_MyTake_Console
                 Console.WriteLine($"\nVložte slovo na {fixniDelkaSlov} písmen.");
                 slovo = Console.ReadLine();
 
-                if (slovo.Length != 5)
+                if (slovo.Length == fixniDelkaSlov)
                 {
-                    Console.WriteLine($"Vložené slovo nemá {fixniDelkaSlov} písmen.");
+                    if (JeVlozeneSlovoRealne(slovo))
+                    {
+                        Console.WriteLine($"Vloženo nereálné slovo. Co jedeš?");
+                        pocetZadanychNesmyslu++;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 } else
                 {
-                    break;
+                    Console.WriteLine($"Vložené slovo nemá {fixniDelkaSlov} písmen.");
                 }
             }
             return slovo;
