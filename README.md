@@ -1,5 +1,5 @@
 # RandomSchoolProjects
-Moje konzolová kopie populární internetové hry NYT Worlde\
+Moje konzolová kopie populární internetové hry NYT Wordle\
 \
 Načte slova z texťáku\
 Dává je uživateli na uhodnutí\
